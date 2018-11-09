@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.NewsCategory"
+    android:background="@color/colorPrimary"
+    android:id="@+id/newsCategoryContainer"
+    tools:showIn="@layout/activity_news_category">
+
+
+
+
+
+
+
+</FrameLayout>

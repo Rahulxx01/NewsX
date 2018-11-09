@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_highlights"
+        android:icon="@drawable/ic_news_headlines"
+        android:title="@string/highlights" />
+
+    <item
+        android:id="@+id/action_categories"
+        android:icon="@drawable/ic_news_categories"
+        android:title="@string/categories" />
+
+    <item
+        android:id="@+id/action_favourites"
+        android:icon="@drawable/ic_star"
+        android:title="@string/favourites" />
+
+
+
+
+</menu>
