@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/gis_logo_img"
                     android:fontFamily="@font/roboto_thin"
-                    android:text="NewsX"
+                    android:text="@string/newsXlogo"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sign_in_text_size"
@@ -92,7 +92,7 @@
                     android:id="@+id/loginFirebase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login" />
+                    android:text="@string/loginbutton" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

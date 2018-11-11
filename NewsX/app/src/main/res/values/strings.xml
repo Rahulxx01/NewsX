@@ -75,5 +75,36 @@
     <string name="news_title">News Title</string>
     <string name="_4th_may_18">4th may 18</string>
     <string name="content">Content</string>
+    <string name="toast_enter_email_address">Enter email address!</string>
+    <string name="toast_enter_password">Enter password!</string>
+    <string name="toast_password_short">Password too short, enter minimum 6 characters!</string>
+    <string name="toast_create_user">createUserWithEmail:onComplete:</string>
+    <string name="toast_auth_failed">Authentication failed.</string>
+    <string name="business">business</string>
+    <string name="general">general</string>
+    <string name="entertainment">entertainment</string>
+    <string name="sports">sports</string>
+    <string name="science">science</string>
+    <string name="health">health</string>
+    <string name="technology">technology</string>
+    <string name="BusinessTitle">Business</string>
+    <string name="GeneralTitle">General</string>
+    <string name="EntertainementTitle">Entertainment</string>
+    <string name="SportsTitle">Sports</string>
+    <string name="ScienceTitle">Science</string>
+    <string name="HealthTitle">Health</string>
+    <string name="TechnologyTitle">Technology</string>
+    <string name="plz_check_your_internetConnection">Plz Check your Internet connection</string>
+    <string name="widget_added_to_homescreen">Widget Added to Home Screen</string>
+    <string name="something_went_wrong_in_server">Something Went Wrong in the Server</string>
+    <string name="no_internet_connection">NO internet connection</string>
+    <string name="newsXlogo">NewsX</string>
+    <string name="loginbutton">Login</string>
+    <string name="registerButton">Register</string>
+    <string name="nameDetail">Name</string>
+    <string name="newsDescription">description</string>
+    <string name="detail_web_view">Detail View</string>
+    <string name="no_news_added">No News Added</string>
+    <string name="list_item_time">time</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -23,9 +24,9 @@ public class NewsWidgetProvider extends AppWidgetProvider {
 
     RemoteViews views;
 
-    String title = "Title";
-    String name = "Name";
-    String description = "Description";
+    public static String title = "Title";
+    public static String name = "Name";
+    public static String description = "Description";
 
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -38,6 +39,30 @@ public class NewsWidgetProvider extends AppWidgetProvider {
         Intent intent = new Intent(context,MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,0);
         views.setOnClickPendingIntent(R.id.linearLayout_Widget,pendingIntent);
+
+
+        if(NewsWidgetProvider.getNewsTitle(context)==null){
+            views.setTextViewText(R.id.newsWidgetTitle, title);
+        }else{
+            views.setTextViewText(R.id.newsWidgetTitle, getNewsTitle(context));
+        }
+        if(NewsWidgetProvider.getNewsDescription(context)==null){
+            views.setTextViewText(R.id.newsWidget_description, description);
+        }else{
+            views.setTextViewText(R.id.newsWidget_description, getNewsDescription(context));
+        }
+
+        if(NewsWidgetProvider.getNewsName(context)==null){
+            views.setTextViewText(R.id.newsWidget_Name, name);
+        }else{
+            views.setTextViewText(R.id.newsWidget_Name, getNewsName(context));
+        }
+
+
+
+
+        AppWidgetManager.getInstance(context).updateAppWidget(
+                new ComponentName(context, NewsWidgetProvider.class), views);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -52,6 +77,10 @@ public class NewsWidgetProvider extends AppWidgetProvider {
             Intent configIntent = new Intent(context, MainActivity.class);
             PendingIntent configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
             views.setOnClickPendingIntent(R.id.linearLayout_Widget, configPendingIntent);
+
+
+
+            updateNewsWidgets(context,appWidgetManager,appWidgetIds);
             //updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
@@ -102,25 +131,33 @@ public class NewsWidgetProvider extends AppWidgetProvider {
 
     }
 
-    private String getNewsTitle(Context context) {
+    private static String getNewsTitle(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("NEWS", Context.MODE_PRIVATE);
 
         String title = prefs.getString("title", "");
         return title;
     }
 
-    private String getNewsName(Context context) {
+    private static String getNewsName(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("NEWS", Context.MODE_PRIVATE);
 
         String name = prefs.getString("name", "");
         return name;
     }
 
-    private String getNewsDescription(Context context) {
+    private static String getNewsDescription(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("NEWS", Context.MODE_PRIVATE);
 
         String description = prefs.getString("description", "");
         return description;
+    }
+
+
+    public static void updateNewsWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, appWidgetId);
+            Toast.makeText(context, "Widget has been updated! ", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

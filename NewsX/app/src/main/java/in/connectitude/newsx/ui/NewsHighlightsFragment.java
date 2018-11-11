@@ -100,7 +100,8 @@ public class NewsHighlightsFragment extends Fragment  {
 
 
         }else{
-            Toast.makeText(getContext(),"NO internet connection",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),R.string.no_internet_connection,Toast.LENGTH_LONG).show();
+            mProgressBar.setVisibility(View.GONE);
         }
         return rootView;
 
@@ -120,7 +121,6 @@ public class NewsHighlightsFragment extends Fragment  {
 
 
     }
-
 
     private class NewsSouceAsynTask extends AsyncTask<String, Void, List<NewsSources>> {
 
@@ -143,7 +143,8 @@ public class NewsHighlightsFragment extends Fragment  {
                 mProgressBar.setVisibility(View.GONE);
 
             } else {
-                Toast.makeText(getContext(), "Something Went Wrong in the Server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.something_went_wrong_in_server, Toast.LENGTH_LONG).show();
+
             }
         }
 

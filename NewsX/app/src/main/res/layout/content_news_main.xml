@@ -54,37 +54,7 @@
     </android.support.v4.view.ViewPager>
 
 
-   <!-- <FrameLayout
-        android:id="@+id/newsFragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="56dp">
 
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/now_showing_placeholer_movie"
-            android:name="in.connectitude.newsx.ui.NewsHighlightsFragment"/>
-
-
-
-
-
-    </FrameLayout>-->
-
-
-
-
-    <!--<android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_news_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@drawable/nav_item_color_state"
-        app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/bottom_navigation_news_menu" />-->
 
 
 </FrameLayout>

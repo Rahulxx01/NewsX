@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:layout_weight="1"
-                android:text="News Title"
+                android:text="@string/news_title"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
                 android:textColor="@color/white" />
 
@@ -52,9 +52,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingRight="60dp"
                     android:orientation="vertical"
-                    >
+                    android:paddingRight="60dp">
 
 
                     <TextView
@@ -63,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:layout_weight="1"
-                        android:text="Source Name"
+                        android:text="@string/nameDetail"
                         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
                         android:textColor="@color/white" />
 
@@ -74,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:layout_weight="1"
-                        android:text="10 pm"
+                        android:text="@string/list_item_time"
 
                         android:textColor="@color/white" />
 
@@ -92,16 +91,17 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
+                        android:contentDescription="@string/browser"
                         android:padding="12dp"
                         android:src="@drawable/ic_browser_blue" />
 
                     <ImageView
                         android:id="@+id/shareLink"
-                        android:padding="14dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_share"
-                        />
+                        android:contentDescription="@string/share"
+                        android:padding="14dp"
+                        android:src="@drawable/ic_share" />
 
                 </LinearLayout>
 

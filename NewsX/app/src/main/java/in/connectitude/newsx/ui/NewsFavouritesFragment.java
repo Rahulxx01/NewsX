@@ -39,30 +39,19 @@ public class NewsFavouritesFragment extends Fragment {
     @BindView(R.id.noNewsAdded)
     TextView noNewsAddedTextView;
 
-    InterstitialAd mInterstitialAd;
-
-
     public NewsFavouritesFragment() {
         // Required empty public constructor
     }
-
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_news_favourites, container, false);
         ButterKnife.bind(this, rootView);
-
         movieDatabase = NewsDatabase.getInstance((getContext()));
         favouritesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         setupViewModel();
         return rootView;
     }
-
-
     private void setupViewModel() {
         NewsViewModel viewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
         viewModel.getNewsList().observe(this, new Observer<List<NewsSources>>() {
@@ -74,7 +63,6 @@ public class NewsFavouritesFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public void onResume() {

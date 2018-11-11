@@ -19,7 +19,7 @@
         android:id="@+id/noNewsAdded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Movies Added"
+        android:text="@string/no_news_added"
         android:textColor="@color/white"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:layout_gravity="center"/>

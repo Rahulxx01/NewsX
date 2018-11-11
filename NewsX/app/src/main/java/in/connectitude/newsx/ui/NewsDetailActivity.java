@@ -1,6 +1,8 @@
 package in.connectitude.newsx.ui;
 
+import android.appwidget.AppWidgetManager;
 import android.arch.persistence.room.Database;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +36,7 @@ import in.connectitude.newsx.R;
 import in.connectitude.newsx.database.AppExecutors;
 import in.connectitude.newsx.database.NewsDatabase;
 import in.connectitude.newsx.model.NewsSources;
+import in.connectitude.newsx.widget.NewsWidgetProvider;
 
 public class NewsDetailActivity extends AppCompatActivity {
 
@@ -104,7 +107,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         if (checkInternetConnectivity()) {
             detailNewsWebView.loadUrl(getIntent().getStringExtra("url"));
         } else {
-            Toast.makeText(this, "Plz Check your Internet connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.plz_check_your_internetConnection, Toast.LENGTH_LONG).show();
             detailNewsWebView.setVisibility(View.GONE);
         }
 
@@ -118,7 +121,12 @@ public class NewsDetailActivity extends AppCompatActivity {
                 editor.putString("name",getIntent().getStringExtra("name"));
                 editor.putString("description", getIntent().getStringExtra("description"));
                 editor.commit();
-                Toast.makeText(getApplicationContext(), "Widget Added to Home Screen", Toast.LENGTH_SHORT).show();
+
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(getBaseContext(), NewsWidgetProvider.class));
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.newsWidgetTitle);
+                NewsWidgetProvider.updateNewsWidgets(getApplicationContext(),appWidgetManager,appWidgetIds);
+                Toast.makeText(getApplicationContext(), R.string.widget_added_to_homescreen, Toast.LENGTH_SHORT).show();
             }
         });
 

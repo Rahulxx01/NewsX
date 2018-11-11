@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_thin"
-                    android:text="NewsX"
+                    android:text="@string/newsXlogo"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sign_in_text_size"
@@ -60,7 +60,6 @@
                     android:id="@+id/username_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:drawableStart="@android:drawable/sym_action_email"
                     android:fontFamily="roboto"
                     android:hint="@string/username_hint"
@@ -100,7 +99,7 @@
                     android:id="@+id/registerFirebase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Register" />
+                    android:text="@string/registerButton" />
 
 
             </LinearLayout>

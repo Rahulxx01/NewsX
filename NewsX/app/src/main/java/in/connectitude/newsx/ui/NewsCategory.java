@@ -41,11 +41,6 @@ public class NewsCategory extends AppCompatActivity  {
     LatestNewsAdapter sourceAdapter;
     public SwipeRefreshLayout mSwipeRefresh;
 
-  /*  @BindView(R.id.categoryNewsActivity_recyclerView)
-    RecyclerView mSourceNewsRecyclerView;
-    @BindView(R.id.categoryNews_ProgressBar)
-    ProgressBar mProgressBar;*/
-
     public String CATEGORY_URL = "https://newsapi.org/v2/top-headlines?country=in&category=";
     public String API_KEY = "&apiKey=c35fbbe4f0f24045bba98b491faeca54";
     public String FINAL_URL = "";
@@ -65,39 +60,37 @@ public class NewsCategory extends AppCompatActivity  {
 
 
         String category = getIntent().getStringExtra("category_name");
-        if(category.equals("business")){
-            setTitle("Business");
+        if(category.equals(getString(R.string.business))){
+            setTitle(R.string.BusinessTitle);
 
-        }else if(category.equals("general")){
+        }else if(category.equals(getString(R.string.general))){
 
-            setTitle("General");
+            setTitle(R.string.GeneralTitle);
 
-        }else if(category.equals("entertainment")){
+        }else if(category.equals(getString(R.string.entertainment))){
 
-            setTitle("Entertainment");
+            setTitle(R.string.EntertainementTitle);
 
-        }else if(category.equals("sports")){
+        }else if(category.equals(getString(R.string.sports))){
 
-            setTitle("Sports");
+            setTitle(R.string.SportsTitle);
 
-        }else if(category.equals("science")){
+        }else if(category.equals(getString(R.string.science))){
 
-            setTitle("Sports");
+            setTitle(R.string.ScienceTitle);
 
-        }else if(category.equals("health")){
+        }else if(category.equals(getString(R.string.health))){
 
-            setTitle("Health");
+            setTitle(R.string.HealthTitle);
 
-        }else if(category.equals("technology")){
+        }else if(category.equals(getString(R.string.technology))){
 
-            setTitle("Technology");
+            setTitle(R.string.TechnologyTitle);
 
         }
         FINAL_URL = CATEGORY_URL+category+API_KEY;
 
         if(null == savedInstanceState){
-
-
             IndividualCategoryFragment individualCategoryFragment = new  IndividualCategoryFragment();
             Bundle fragmentBundle1 = new Bundle();
             fragmentBundle1.putString("category", category);
@@ -105,88 +98,9 @@ public class NewsCategory extends AppCompatActivity  {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.newsCategoryContainer, individualCategoryFragment)
                     .commit();
-
-
-
-
-        }
-
-
-
-
-
-
-           /* if (checkInternetConnectivity()) {
-
-                new NewsSouceAsynTask().execute();
-
-            } else {
-                mProgressBar.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-            }
-            mSourceNewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-            mSwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_categoryNews);
-            mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-
-                    new NewsSouceAsynTask().execute();
-
-                }
-            });*/
-
-
-
-
-
-    }
-
-
-
-  /*  private class NewsSouceAsynTask extends AsyncTask<String, Void, List<NewsSources>> {
-
-        @Override
-        protected List<NewsSources> doInBackground(String... strings) {
-            List<NewsSources> result = NewsSourcesUtils.fetchHeadlinesData(FINAL_URL);
-            return result;
-            //  return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<NewsSources> list) {
-            //super.onPostExecute(pcmSimplexes);
-            if (list != null && !list.isEmpty()) {
-                sourceList = list;
-
-                sourceAdapter = new LatestNewsAdapter(getApplicationContext(), list);
-
-                mSourceNewsRecyclerView.setAdapter(sourceAdapter);
-                mProgressBar.setVisibility(View.GONE);
-
-            } else {
-                Toast.makeText(getApplicationContext(), "Something Went Wrong in the Server", Toast.LENGTH_LONG).show();
-            }
         }
 
     }
-
-    public boolean checkInternetConnectivity() {
-        //Check internet connection//
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        // Get details on the currently active default data network//
-        NetworkInfo netInformation = connectivityManager.getActiveNetworkInfo();
-        // If there is a network connection, then fetch data//
-        if (netInformation != null && netInformation.isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
-
-
-    }*/
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
