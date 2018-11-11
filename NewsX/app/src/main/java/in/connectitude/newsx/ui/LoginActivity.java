@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private AdView mAdView;
 
+    @BindView(R.id.login_ProgressBar)
+    ProgressBar loginProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        loginProgressBar.setVisibility(View.GONE);
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         mAdView = findViewById(R.id.adViewLogin);
@@ -70,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginProgressBar.setVisibility(View.VISIBLE);
                 loginUser();
             }
         });
@@ -107,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         //progressBar.setVisibility(View.GONE);
                         if (!task.isSuccessful()) {
+                            loginProgressBar.setVisibility(View.GONE);
                             // there was an error
                             if (password.length() < 6) {
                                 passwordLogin.setError(getString(R.string.minimum_password));
@@ -114,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                             }
                         } else {
+                            loginProgressBar.setVisibility(View.VISIBLE);
                             getIntent().putExtra("username",email);
                             Intent intent = new Intent(LoginActivity.this, NewsMainActivity.class);
                             startActivity(intent);

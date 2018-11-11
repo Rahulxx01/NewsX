@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.alreadyRegistered)
     TextView alreadyRegistered;
 
+    @BindView(R.id.register_ProgressBar)
+    ProgressBar registerProgressbar;
+
 
     private FirebaseAuth auth;
 
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+
+        registerProgressbar.setVisibility(View.GONE);
 
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
@@ -89,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                // Intent intent = new Intent(MainActivity.this,NewsMainActivity.class);
                 //startActivity(intent);
+                registerProgressbar.setVisibility(View.VISIBLE);
                 registerUser();
 
 
@@ -128,9 +135,11 @@ public class MainActivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+                            registerProgressbar.setVisibility(View.GONE);
                             Toast.makeText(MainActivity.this, "Authentication failed." + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
+                            registerProgressbar.setVisibility(View.VISIBLE);
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             finish();
                         }

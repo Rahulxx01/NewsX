@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.NewsDetailActivity"
     tools:showIn="@layout/activity_news_detail">
+
+
+
 
 
     <ScrollView
@@ -31,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     android:scaleType="centerCrop"
+                    android:contentDescription="@string/logo_image"
                     android:src="@drawable/ic_browser_blue" />
 
 
@@ -48,7 +52,7 @@
                         android:id="@+id/newsTitle_TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="News Title"
+                        android:text="@string/news_title"
                         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -80,7 +84,7 @@
                             android:paddingTop="4dp"
                             android:paddingRight="16dp"
                             android:paddingBottom="4dp"
-                            android:text="4th may 18"
+                            android:text="@string/_4th_may_18"
                             android:textColor="@color/white" />
 
 
@@ -203,7 +207,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Content"
+                android:text="@string/content"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
                 android:textColor="@color/white" />
 

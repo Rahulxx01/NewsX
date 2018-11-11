@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,9 @@ public class NewsDetailActivity extends AppCompatActivity {
     @BindView(R.id.news_content)
     TextView contentTextView;
 
+
+
+
     @BindView(R.id.detailNewsWebView)
     WebView detailNewsWebView;
 
@@ -79,17 +83,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-
-
         ButterKnife.bind(this);
-
-
-
-
-
 
         if (!checkInternetConnectivity()) {
             detailNewsWebView.setVisibility(View.GONE);
@@ -113,6 +107,8 @@ public class NewsDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Plz Check your Internet connection", Toast.LENGTH_LONG).show();
             detailNewsWebView.setVisibility(View.GONE);
         }
+
+
 
         browserImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +163,6 @@ public class NewsDetailActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 

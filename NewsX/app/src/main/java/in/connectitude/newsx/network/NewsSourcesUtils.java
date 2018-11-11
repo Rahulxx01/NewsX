@@ -144,7 +144,7 @@ public final class NewsSourcesUtils {
     }
 
 
-    private static List<NewsSources> extractNewsHeadlines(String newsJson){
+    public static List<NewsSources> extractNewsHeadlines(String newsJson){
 
         if (TextUtils.isEmpty(newsJson)) {
             return null;

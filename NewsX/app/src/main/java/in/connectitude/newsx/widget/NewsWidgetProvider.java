@@ -28,17 +28,19 @@ public class NewsWidgetProvider extends AppWidgetProvider {
     String description = "Description";
 
 
-    /*static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
+
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.news_widget_provider);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
 
-        // Instruct the widget manager to update the widget
+        Intent intent = new Intent(context,MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,0);
+        views.setOnClickPendingIntent(R.id.linearLayout_Widget,pendingIntent);
+
         appWidgetManager.updateAppWidget(appWidgetId, views);
-    }*/
+    }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -49,7 +51,7 @@ public class NewsWidgetProvider extends AppWidgetProvider {
 
             Intent configIntent = new Intent(context, MainActivity.class);
             PendingIntent configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
-            views.setOnClickPendingIntent(R.id.newsWidgetTitle, configPendingIntent);
+            views.setOnClickPendingIntent(R.id.linearLayout_Widget, configPendingIntent);
             //updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }

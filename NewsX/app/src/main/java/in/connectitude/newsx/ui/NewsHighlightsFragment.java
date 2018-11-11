@@ -1,45 +1,44 @@
 package in.connectitude.newsx.ui;
 
 import android.app.LoaderManager;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.graphics.Movie;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.connectitude.newsx.R;
 import in.connectitude.newsx.adapters.LatestNewsAdapter;
-import in.connectitude.newsx.loaders.NewsLoader;
-import in.connectitude.newsx.model.Articles;
+import in.connectitude.newsx.model.Article;
 import in.connectitude.newsx.model.News;
 import in.connectitude.newsx.model.NewsSources;
-import in.connectitude.newsx.model.Sources;
+import in.connectitude.newsx.model.Source;
 import in.connectitude.newsx.network.ApiService;
 import in.connectitude.newsx.network.NewsSourcesUtils;
 import in.connectitude.newsx.network.RetrofitClient;
+import in.connectitude.newsx.viewmodel.LatestNewsViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +57,13 @@ public class NewsHighlightsFragment extends Fragment  {
     @BindView(R.id.latestNews_ProgressBar)
     ProgressBar mProgressBar;
 
+    //public List<News> newsData;
+
+    News newsData;
+    List<Article> articles;
+
+
+
     private InterstitialAd mInterstitialAd;
 
 
@@ -71,61 +77,34 @@ public class NewsHighlightsFragment extends Fragment  {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_news_highlights, container, false);
         ButterKnife.bind(this,rootView);
 
+        mSourceNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        if(checkInternetConnectivity()){
 
 
-
-            if (checkInternetConnectivity()) {
-
-                new NewsSouceAsynTask().execute();
-
-            } else {
-                mProgressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-            }
-
-            mSourceNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-            mSwipeRefresh = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout_latestNews);
-            mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+            model.getNewsData().observe(this, new Observer<List<NewsSources>>() {
                 @Override
-                public void onRefresh() {
-
-
-
-                    new NewsSouceAsynTask().execute();
-
+                public void onChanged(@Nullable List<NewsSources> heroList) {
+                    sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                    mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                    mProgressBar.setVisibility(View.GONE);
                 }
             });
 
 
-
-
-
-
-            // newHighlightsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
-
-
-
-
-
-
+        }else{
+            Toast.makeText(getContext(),"NO internet connection",Toast.LENGTH_LONG).show();
+        }
         return rootView;
 
-
-
-
     }
-
 
     public boolean checkInternetConnectivity() {
         //Check internet connection//

@@ -62,4 +62,18 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="welcome">Welcome</string>
+
+    <string name="main_notification_channel_name">Primary</string>
+
+    <string name="charging_reminder_notification_title">Continue Reading News</string>
+    <string name="charging_reminder_notification_body">Latest news are here Dont miss out an opportunity</string>
+
+    <string name="logo_image">Logo Image</string>
+    <string name="already_registered">Already Registered?</string>
+    <string name="forgot_password_firebase">Forgot Password?</string>
+    <string name="register_firebase">Register?</string>
+    <string name="news_title">News Title</string>
+    <string name="_4th_may_18">4th may 18</string>
+    <string name="content">Content</string>
+
 </resources>

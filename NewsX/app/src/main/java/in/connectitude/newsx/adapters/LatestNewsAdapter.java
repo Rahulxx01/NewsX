@@ -7,7 +7,10 @@ package in.connectitude.newsx.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +23,14 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +75,7 @@ public class LatestNewsAdapter extends RecyclerView.Adapter<LatestNewsAdapter.La
         return new LatestNewsAdapter.LatestNewsCardViewHolder(itemView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(final LatestNewsAdapter.LatestNewsCardViewHolder holder, int position) {
 
@@ -75,37 +85,15 @@ public class LatestNewsAdapter extends RecyclerView.Adapter<LatestNewsAdapter.La
 
 
         holder.author.setText(listItem.getName());
-        holder.datePublished.setText(listItem.getPublishedAt());
+        String date = null;
+        try {
+            date = formatDate(listItem.getPublishedAt());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.datePublished.setText(date);
         holder.title.setText(listItem.getTitle());
         Picasso.with(mContext).load(listItem.getUrlToImage()).into(holder.newsImageView);
-
-        holder.browserLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, listItem.getUrl());
-                v.getContext().startActivity(shareIntent);
-            }
-        });
-
-
-        holder.shareLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(listItem.getUrl()));
-                v.getContext().startActivity(i);
-            }
-        });
-
-
-
-
-
-
-
-
 
 
     }
@@ -142,13 +130,12 @@ public class LatestNewsAdapter extends RecyclerView.Adapter<LatestNewsAdapter.La
             super(itemView);
             ButterKnife.bind(this, itemView);
 
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
-
-
-
-
 
                         Context context = view.getContext();
                         int position = getAdapterPosition();
@@ -157,8 +144,14 @@ public class LatestNewsAdapter extends RecyclerView.Adapter<LatestNewsAdapter.La
                         intent.putExtra("title", mListItems.get(position).getTitle());
                         intent.putExtra("url", mListItems.get(position).getUrl());
                         intent.putExtra("description", mListItems.get(position).getDescription());
-                        intent.putExtra("publishedAt", mListItems.get(position).getPublishedAt());
-                        intent.putExtra("url_image", mListItems.get(position).getUrlToImage());
+
+                    try {
+                        intent.putExtra("publishedAt", formatDate(mListItems.get(position).getPublishedAt()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    intent.putExtra("url_image", mListItems.get(position).getUrlToImage());
                         intent.putExtra("content", mListItems.get(position).getContent());
                         context.startActivity(intent);
 
@@ -167,7 +160,39 @@ public class LatestNewsAdapter extends RecyclerView.Adapter<LatestNewsAdapter.La
                 }
             });
 
+            browserLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    int position = getAdapterPosition();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse( mListItems.get(position).getUrl()));
+                    context.startActivity(i);
+                }
+            });
+
+
+            shareLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    int position = getAdapterPosition();
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, mListItems.get(position).getUrl());
+                    context.startActivity(shareIntent);
+                }
+            });
+
         }
+    }
+
+
+    public String formatDate(String date) throws ParseException {
+
+            return date.substring(0,10);
+
+
     }
 
 

@@ -62,16 +62,45 @@ public class NewsCategory extends AppCompatActivity  {
 
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         String category = getIntent().getStringExtra("category_name");
-        setTitle(category);
+        if(category.equals("business")){
+            setTitle("Business");
+
+        }else if(category.equals("general")){
+
+            setTitle("General");
+
+        }else if(category.equals("entertainment")){
+
+            setTitle("Entertainment");
+
+        }else if(category.equals("sports")){
+
+            setTitle("Sports");
+
+        }else if(category.equals("science")){
+
+            setTitle("Sports");
+
+        }else if(category.equals("health")){
+
+            setTitle("Health");
+
+        }else if(category.equals("technology")){
+
+            setTitle("Technology");
+
+        }
         FINAL_URL = CATEGORY_URL+category+API_KEY;
 
         if(null == savedInstanceState){
 
-           ;
+
             IndividualCategoryFragment individualCategoryFragment = new  IndividualCategoryFragment();
             Bundle fragmentBundle1 = new Bundle();
-            fragmentBundle1.putString("FINAL_URL", FINAL_URL);
+            fragmentBundle1.putString("category", category);
             individualCategoryFragment.setArguments(fragmentBundle1);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.newsCategoryContainer, individualCategoryFragment)

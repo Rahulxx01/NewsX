@@ -1,12 +1,13 @@
 package in.connectitude.newsx.ui;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,8 +24,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import in.connectitude.newsx.R;
 import in.connectitude.newsx.adapters.LatestNewsAdapter;
+import in.connectitude.newsx.model.Article;
+import in.connectitude.newsx.model.News;
 import in.connectitude.newsx.model.NewsSources;
 import in.connectitude.newsx.network.NewsSourcesUtils;
+import in.connectitude.newsx.viewmodel.LatestNewsViewModel;
 
 
 public class IndividualCategoryFragment extends Fragment {
@@ -43,13 +47,16 @@ public class IndividualCategoryFragment extends Fragment {
     public String API_KEY = "&apiKey=c35fbbe4f0f24045bba98b491faeca54";
     public String FINAL_URL = "";
 
+    News newsData;
+    List<Article> articles;
+
 
     public IndividualCategoryFragment() {
         // Required empty public constructor
     }
 
 
-
+    String category;
 
 
     @Override
@@ -58,35 +65,114 @@ public class IndividualCategoryFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_individual_category, container, false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
 
 
-        FINAL_URL = getArguments().getString("FINAL_URL");
+        //FINAL_URL = getArguments().getString("FINAL_URL");
 
+        category = getArguments().getString("category");
+        mProgressBar.setVisibility(View.VISIBLE);
 
-
+        mSourceNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (checkInternetConnectivity()) {
 
-            new NewsSouceAsynTask().execute();
+            if (category.equals("business")) {
+
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsBusiness().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+                });
+
+            } else if (category.equals("general")) {
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsGeneral().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+                });
+
+
+            } else if (category.equals("health")) {
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsHealth().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+
+                    }
+                });
+
+
+            } else if (category.equals("science")) {
+
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsScience().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+
+                    }
+                });
+
+
+            } else if (category.equals("sports")) {
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsSports().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+
+                    }
+                });
+
+
+            } else if (category.equals("technology")) {
+
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsTechnology().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+
+                    }
+                });
+
+
+            } else {
+                //Entertainment
+                LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
+                model.getNewsEntertainment().observe(this, new Observer<List<NewsSources>>() {
+                    @Override
+                    public void onChanged(@Nullable List<NewsSources> heroList) {
+                        sourceAdapter = new LatestNewsAdapter(getContext(), heroList);
+                        mSourceNewsRecyclerView.setAdapter(sourceAdapter);
+                        mProgressBar.setVisibility(View.GONE);
+
+                    }
+                });
+            }
+
 
         } else {
-            mProgressBar.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "NO internet connection", Toast.LENGTH_LONG).show();
         }
-        mSourceNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-        mSwipeRefresh = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout_categoryNews);
-        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                new NewsSouceAsynTask().execute();
-
-            }
-        });
-
 
 
 
@@ -135,7 +221,6 @@ public class IndividualCategoryFragment extends Fragment {
 
 
     }
-
 
 
 }

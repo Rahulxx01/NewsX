@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import in.connectitude.newsx.R;
 import in.connectitude.newsx.adapters.MainTabPageAdapter;
+import in.connectitude.newsx.sync.ReminderUtilities;
+import in.connectitude.newsx.utils.NotificationUtils;
 
 public class NewsMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +53,9 @@ public class NewsMainActivity extends AppCompatActivity
 
         FirebaseUser user =FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail().toString().trim();
+
+        //NotificationUtils.remindUserBecauseCharging(this);
+        ReminderUtilities.scheduleChargingReminder(this);
 
       //   email = getIntent().getStringExtra("username");
 
@@ -166,27 +171,8 @@ public class NewsMainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        }  else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_logOut) {
             auth.signOut();
-            startActivity(new Intent(NewsMainActivity.this, LoginActivity.class));
+
 
             // this listener will be called when there is change in firebase user session
             FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
@@ -201,6 +187,40 @@ public class NewsMainActivity extends AppCompatActivity
                     }
                 }
             };
+
+            startActivity(new Intent(NewsMainActivity.this, LoginActivity.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        }  else if (id == R.id.nav_logOut) {
+            auth.signOut();
+
+
+            // this listener will be called when there is change in firebase user session
+            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user == null) {
+                        // user auth state is changed - user is null
+                        // launch login activity
+                        startActivity(new Intent(NewsMainActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                }
+            };
+
+            startActivity(new Intent(NewsMainActivity.this, LoginActivity.class));
 
         }
 

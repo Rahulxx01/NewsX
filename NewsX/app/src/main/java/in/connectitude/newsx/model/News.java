@@ -7,38 +7,58 @@ import java.util.List;
 
 public class News {
 
-    @SerializedName("articles")
-    @Expose
-    private List<Articles> articles;
 
-    @SerializedName("totalResults")
-    @Expose
-    private String totalResults;
 
     @SerializedName("status")
     @Expose
     private String status;
 
 
+    @SerializedName("totalResults")
+    @Expose
+    private Integer totalResults;
+
+
+    @SerializedName("articles")
+    @Expose
+    private List<Article> articles;
+
+
+
     public News() {
 
     }
 
-    public News(List<Articles> articles, String totalResults, String status) {
-        this.articles = articles;
+    public News(String status, Integer totalResults,List<Article> articles) {
         this.totalResults = totalResults;
         this.status = status;
+        this.articles = articles;
+
     }
 
-    public List<Articles> getArticles() {
-        return articles;
-    }
+
 
     public String getStatus() {
         return status;
     }
 
-    public String getTotalResults() {
+    public Integer getTotalResults() {
         return totalResults;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTotalResults(Integer totalResults) {
+        this.totalResults = totalResults;
     }
 }

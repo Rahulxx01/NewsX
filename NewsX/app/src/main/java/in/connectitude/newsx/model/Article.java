@@ -5,8 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Articles {
+public class Article {
 
+    @SerializedName("source")
+    @Expose
+    private Source source;
 
     @SerializedName("author")
     @Expose
@@ -27,6 +30,7 @@ public class Articles {
     @SerializedName("urlToImage")
     @Expose
     private String urlToImage;
+
     @SerializedName("publishedAt")
     @Expose
     private String publishedAt;
@@ -35,19 +39,17 @@ public class Articles {
     @Expose
     private String content;
 
-    @SerializedName("source")
-    @Expose
-    private List<Sources> source;
 
-    public List<Sources> getSource() {
-        return source;
+    public Article(){
+
     }
 
-    public Articles(String author, List<Sources> source, String title, String description,
-                    String url, String urlToImage, String publishedAt, String content) {
 
-        this.author = author;
+    public Article(Source source, String author, String title, String description,
+                   String url, String urlToImage, String publishedAt, String content) {
+
         this.source = source;
+        this.author = author;
         this.title = title;
         this.description = description;
         this.url = url;
@@ -57,6 +59,10 @@ public class Articles {
 
     }
 
+
+    public Source getSource() {
+        return source;
+    }
 
     public String getUrlToImage() {
         return urlToImage;
@@ -84,6 +90,38 @@ public class Articles {
 
     public String getAuthor() {
         return author;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }
