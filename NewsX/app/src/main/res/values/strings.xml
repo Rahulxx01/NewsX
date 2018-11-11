@@ -159,6 +159,7 @@
     <string name="No_Internet_Connection">NO internet connection</string>
     <string name="something_went_wrong">Something Went Wrong in the Server</string>
     <string name="category_string_fragment">category</string>
+    <string name="login">Login</string>
 
 
 </resources>

@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setTitle("Login");
+        setTitle(R.string.login);
 
 
 

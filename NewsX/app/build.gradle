@@ -12,9 +12,9 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("key.jks")
+            storeFile file("key2.jks")
             storePassword "123456"
-            keyAlias "Udacity Gradle"
+            keyAlias "key0"
             keyPassword "123456"
         }
     }
