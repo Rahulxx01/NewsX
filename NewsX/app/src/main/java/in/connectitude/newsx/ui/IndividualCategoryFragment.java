@@ -70,14 +70,14 @@ public class IndividualCategoryFragment extends Fragment {
 
         //FINAL_URL = getArguments().getString("FINAL_URL");
 
-        category = getArguments().getString("category");
+        category = getArguments().getString(getString(R.string.category_string_fragment));
         mProgressBar.setVisibility(View.VISIBLE);
 
         mSourceNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (checkInternetConnectivity()) {
 
-            if (category.equals("business")) {
+            if (category.equals(getString(R.string.business))) {
 
                 LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
                 model.getNewsBusiness().observe(this, new Observer<List<NewsSources>>() {
@@ -89,7 +89,7 @@ public class IndividualCategoryFragment extends Fragment {
                     }
                 });
 
-            } else if (category.equals("general")) {
+            } else if (category.equals(getString(R.string.general))) {
                 LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
                 model.getNewsGeneral().observe(this, new Observer<List<NewsSources>>() {
                     @Override
@@ -101,7 +101,7 @@ public class IndividualCategoryFragment extends Fragment {
                 });
 
 
-            } else if (category.equals("health")) {
+            } else if (category.equals(getString(R.string.health))) {
                 LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
                 model.getNewsHealth().observe(this, new Observer<List<NewsSources>>() {
                     @Override
@@ -114,7 +114,7 @@ public class IndividualCategoryFragment extends Fragment {
                 });
 
 
-            } else if (category.equals("science")) {
+            } else if (category.equals(getString(R.string.science))) {
 
                 LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
                 model.getNewsScience().observe(this, new Observer<List<NewsSources>>() {
@@ -128,7 +128,7 @@ public class IndividualCategoryFragment extends Fragment {
                 });
 
 
-            } else if (category.equals("sports")) {
+            } else if (category.equals(getString(R.string.sports))) {
                 LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
                 model.getNewsSports().observe(this, new Observer<List<NewsSources>>() {
                     @Override
@@ -141,7 +141,7 @@ public class IndividualCategoryFragment extends Fragment {
                 });
 
 
-            } else if (category.equals("technology")) {
+            } else if (category.equals(getString(R.string.technology))) {
 
                 LatestNewsViewModel model = ViewModelProviders.of(this).get(LatestNewsViewModel.class);
                 model.getNewsTechnology().observe(this, new Observer<List<NewsSources>>() {
@@ -171,7 +171,7 @@ public class IndividualCategoryFragment extends Fragment {
 
 
         } else {
-            Toast.makeText(getContext(), "NO internet connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.No_Internet_Connection, Toast.LENGTH_LONG).show();
         }
 
 
@@ -201,7 +201,7 @@ public class IndividualCategoryFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
 
             } else {
-                Toast.makeText(getContext(), "Something Went Wrong in the Server", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.something_went_wrong, Toast.LENGTH_LONG).show();
             }
         }
 

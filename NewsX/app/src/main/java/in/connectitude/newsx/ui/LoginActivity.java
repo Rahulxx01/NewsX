@@ -122,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         } else {
                             loginProgressBar.setVisibility(View.VISIBLE);
-                            getIntent().putExtra("username",email);
                             Intent intent = new Intent(LoginActivity.this, NewsMainActivity.class);
                             startActivity(intent);
                             //finish();

@@ -36,6 +36,7 @@ import in.connectitude.newsx.R;
 import in.connectitude.newsx.database.AppExecutors;
 import in.connectitude.newsx.database.NewsDatabase;
 import in.connectitude.newsx.model.NewsSources;
+import in.connectitude.newsx.utils.Constants;
 import in.connectitude.newsx.widget.NewsWidgetProvider;
 
 public class NewsDetailActivity extends AppCompatActivity {
@@ -92,20 +93,20 @@ public class NewsDetailActivity extends AppCompatActivity {
             detailNewsWebView.setVisibility(View.GONE);
         }
 
-        final String title = getIntent().getStringExtra("title");
-        titleTextView.setText(getIntent().getStringExtra("title"));
-        nameTextView.setText(getIntent().getStringExtra("name"));
-        publishedAtTextView.setText(getIntent().getStringExtra("publishedAt"));
-        descriptionTextView.setText(getIntent().getStringExtra("description"));
-        contentTextView.setText(getIntent().getStringExtra("content"));
+        final String title = getIntent().getStringExtra(getString(R.string.titleDetail));
+        titleTextView.setText(getIntent().getStringExtra(getString(R.string.titleDetail)));
+        nameTextView.setText(getIntent().getStringExtra(getString(R.string.newNameDetail)));
+        publishedAtTextView.setText(getIntent().getStringExtra(getString(R.string.publishedAtDetail)));
+        descriptionTextView.setText(getIntent().getStringExtra(getString(R.string.newsDescriptionDetail)));
+        contentTextView.setText(getIntent().getStringExtra(getString(R.string.contentDetail)));
 
 
-        Picasso.with(this).load(getIntent().getStringExtra("url_image")).into(newsImagaView);
+        Picasso.with(this).load(getIntent().getStringExtra(getString(R.string.urlImageDetail))).into(newsImagaView);
 
         WebSettings webSettings = detailNewsWebView.getSettings();
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         if (checkInternetConnectivity()) {
-            detailNewsWebView.loadUrl(getIntent().getStringExtra("url"));
+            detailNewsWebView.loadUrl(getIntent().getStringExtra(getString(R.string.urlDetail)));
         } else {
             Toast.makeText(this, R.string.plz_check_your_internetConnection, Toast.LENGTH_LONG).show();
             detailNewsWebView.setVisibility(View.GONE);
@@ -116,10 +117,10 @@ public class NewsDetailActivity extends AppCompatActivity {
         browserImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = getSharedPreferences("NEWS", MODE_PRIVATE).edit();
-                editor.putString("title",getIntent().getStringExtra("title"));
-                editor.putString("name",getIntent().getStringExtra("name"));
-                editor.putString("description", getIntent().getStringExtra("description"));
+                SharedPreferences.Editor editor = getSharedPreferences(Constants.NEWS, MODE_PRIVATE).edit();
+                editor.putString(getString(R.string.titleDetail),getIntent().getStringExtra(getString(R.string.titleDetail)));
+                editor.putString(getString(R.string.newNameDetail),getIntent().getStringExtra(getString(R.string.newNameDetail)));
+                editor.putString(getString(R.string.newsDescriptionDetail), getIntent().getStringExtra(getString(R.string.newsDescriptionDetail)));
                 editor.commit();
 
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
@@ -136,7 +137,7 @@ public class NewsDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra("url"));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra(getString(R.string.urlDetail)));
                 startActivity(shareIntent);
             }
         });
@@ -160,13 +161,13 @@ public class NewsDetailActivity extends AppCompatActivity {
                 if(exists(title)){
                     deleteNews(title);
                     favouritesButton.setChecked(false);
-                    Toast.makeText(getApplicationContext(),getIntent().getStringExtra("title")+" removed from Favourites",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getIntent().getStringExtra(getString(R.string.titleDataBase))+getString(R.string.removedFromFav),Toast.LENGTH_LONG).show();
 
                 }else{
 
                     onSaveButtonClicked(title);
                     favouritesButton.setChecked(true);
-                    Toast.makeText(getApplicationContext(),getIntent().getStringExtra("title")+" added to Favourites",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getIntent().getStringExtra(getString(R.string.titleDataBase))+getString(R.string.addedToFab),Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -178,10 +179,10 @@ public class NewsDetailActivity extends AppCompatActivity {
 
         String newsTitle = titleTextView.getText().toString();
         String name = nameTextView.getText().toString();
-        String author = getIntent().getStringExtra("author");
+        String author = getIntent().getStringExtra(getString(R.string.authorDetail));
         String description = descriptionTextView.getText().toString();
-        String url =  getIntent().getStringExtra("url");
-        String urlToImage = getIntent().getStringExtra("url_image");
+        String url =  getIntent().getStringExtra(getString(R.string.urlDetail));
+        String urlToImage = getIntent().getStringExtra(getString(R.string.urlImageDetail));
         String publishedAt = publishedAtTextView.getText().toString();
         String content = contentTextView.getText().toString();
 

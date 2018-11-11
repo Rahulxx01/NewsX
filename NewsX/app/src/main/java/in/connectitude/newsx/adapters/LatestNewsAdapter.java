@@ -140,19 +140,19 @@ public class LatestNewsAdapter extends RecyclerView.Adapter<LatestNewsAdapter.La
                         Context context = view.getContext();
                         int position = getAdapterPosition();
                         Intent intent = new Intent(view.getContext(), NewsDetailActivity.class);
-                        intent.putExtra("name", mListItems.get(position).getName());
-                        intent.putExtra("title", mListItems.get(position).getTitle());
-                        intent.putExtra("url", mListItems.get(position).getUrl());
-                        intent.putExtra("description", mListItems.get(position).getDescription());
+                        intent.putExtra(context.getString(R.string.nameAdapter), mListItems.get(position).getName());
+                        intent.putExtra(context.getString(R.string.titleAdapter), mListItems.get(position).getTitle());
+                        intent.putExtra(context.getString(R.string.urlAdapter), mListItems.get(position).getUrl());
+                        intent.putExtra(context.getString(R.string.descriptionAdapter), mListItems.get(position).getDescription());
 
                     try {
-                        intent.putExtra("publishedAt", formatDate(mListItems.get(position).getPublishedAt()));
+                        intent.putExtra(context.getString(R.string.publishedAtAdapter), formatDate(mListItems.get(position).getPublishedAt()));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
-                    intent.putExtra("url_image", mListItems.get(position).getUrlToImage());
-                        intent.putExtra("content", mListItems.get(position).getContent());
+                    intent.putExtra(context.getString(R.string.urlImageAdapter), mListItems.get(position).getUrlToImage());
+                        intent.putExtra(context.getString(R.string.contentAdapter), mListItems.get(position).getContent());
                         context.startActivity(intent);
 
 

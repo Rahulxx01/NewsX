@@ -21,7 +21,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.d(TAG, getString(R.string.From) + remoteMessage.getFrom());
 
         RemoteMessage.Notification notification = remoteMessage.getNotification();
         if (notification != null) {

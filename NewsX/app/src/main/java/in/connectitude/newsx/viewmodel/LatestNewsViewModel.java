@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.connectitude.newsx.R;
 import in.connectitude.newsx.model.Article;
 import in.connectitude.newsx.model.News;
 import in.connectitude.newsx.model.NewsSources;
@@ -28,6 +29,8 @@ public class LatestNewsViewModel extends ViewModel {
 
     News newsData;
     List<Article> articles;
+
+
 
 
     MutableLiveData<List<NewsSources>> newsDataList ;
@@ -84,8 +87,8 @@ public class LatestNewsViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+                //Toast.makeText(g, "Error has occured", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -156,7 +159,7 @@ public class LatestNewsViewModel extends ViewModel {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+                //Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 
@@ -209,7 +212,7 @@ public class LatestNewsViewModel extends ViewModel {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+               // Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 
@@ -262,7 +265,7 @@ public class LatestNewsViewModel extends ViewModel {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+               // Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 
@@ -315,7 +318,7 @@ public class LatestNewsViewModel extends ViewModel {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+                //Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 
@@ -370,7 +373,7 @@ public class LatestNewsViewModel extends ViewModel {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+                //Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 
@@ -424,7 +427,7 @@ public class LatestNewsViewModel extends ViewModel {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+                //Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 
@@ -475,7 +478,7 @@ public LiveData<List<NewsSources>> getNewsBusiness() {
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 //Toast.makeText(getContext(), "Error has occured", Toast.LENGTH_SHORT).show();
-                Log.v("NewsHighlightsFragment:", t.toString());
+                //Log.v("NewsHighlightsFragment:", t.toString());
             }
         });
 

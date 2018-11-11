@@ -16,6 +16,7 @@ import java.util.Random;
 
 import in.connectitude.newsx.R;
 import in.connectitude.newsx.ui.MainActivity;
+import in.connectitude.newsx.utils.Constants;
 
 /**
  * Implementation of App Widget functionality.
@@ -24,9 +25,7 @@ public class NewsWidgetProvider extends AppWidgetProvider {
 
     RemoteViews views;
 
-    public static String title = "Title";
-    public static String name = "Name";
-    public static String description = "Description";
+
 
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -42,18 +41,18 @@ public class NewsWidgetProvider extends AppWidgetProvider {
 
 
         if(NewsWidgetProvider.getNewsTitle(context)==null){
-            views.setTextViewText(R.id.newsWidgetTitle, title);
+            views.setTextViewText(R.id.newsWidgetTitle, context.getString(R.string.TitleWidget));
         }else{
             views.setTextViewText(R.id.newsWidgetTitle, getNewsTitle(context));
         }
         if(NewsWidgetProvider.getNewsDescription(context)==null){
-            views.setTextViewText(R.id.newsWidget_description, description);
+            views.setTextViewText(R.id.newsWidget_description, context.getString(R.string.decriptionWidget));
         }else{
             views.setTextViewText(R.id.newsWidget_description, getNewsDescription(context));
         }
 
         if(NewsWidgetProvider.getNewsName(context)==null){
-            views.setTextViewText(R.id.newsWidget_Name, name);
+            views.setTextViewText(R.id.newsWidget_Name, context.getString(R.string.nameWidget));
         }else{
             views.setTextViewText(R.id.newsWidget_Name, getNewsName(context));
         }
@@ -106,18 +105,18 @@ public class NewsWidgetProvider extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.newsWidgetTitle, pendingIntent);
 
         if(getNewsTitle(context)==null){
-            views.setTextViewText(R.id.newsWidgetTitle, title);
+            views.setTextViewText(R.id.newsWidgetTitle, context.getString(R.string.TitleWidget));
         }else{
             views.setTextViewText(R.id.newsWidgetTitle, getNewsTitle(context));
         }
         if(getNewsDescription(context)==null){
-            views.setTextViewText(R.id.newsWidget_description, description);
+            views.setTextViewText(R.id.newsWidget_description,  context.getString(R.string.decriptionWidget));
         }else{
             views.setTextViewText(R.id.newsWidget_description, getNewsDescription(context));
         }
 
         if(getNewsName(context)==null){
-            views.setTextViewText(R.id.newsWidget_Name, name);
+            views.setTextViewText(R.id.newsWidget_Name, context.getString(R.string.nameWidget));
         }else{
             views.setTextViewText(R.id.newsWidget_Name, getNewsName(context));
         }
@@ -132,23 +131,23 @@ public class NewsWidgetProvider extends AppWidgetProvider {
     }
 
     private static String getNewsTitle(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences("NEWS", Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(Constants.NEWS, Context.MODE_PRIVATE);
 
-        String title = prefs.getString("title", "");
+        String title = prefs.getString(context.getString(R.string.keywidgetTitle), "");
         return title;
     }
 
     private static String getNewsName(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences("NEWS", Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(Constants.NEWS, Context.MODE_PRIVATE);
 
-        String name = prefs.getString("name", "");
+        String name = prefs.getString(context.getString(R.string.keywidgetName), "");
         return name;
     }
 
     private static String getNewsDescription(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences("NEWS", Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(Constants.NEWS, Context.MODE_PRIVATE);
 
-        String description = prefs.getString("description", "");
+        String description = prefs.getString(context.getString(R.string.keywidgetDescription), "");
         return description;
     }
 
@@ -156,7 +155,7 @@ public class NewsWidgetProvider extends AppWidgetProvider {
     public static void updateNewsWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
-            Toast.makeText(context, "Widget has been updated! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.widgetUpdatedSuccesfully, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import in.connectitude.newsx.R;
 import in.connectitude.newsx.ui.NewsCategoryFragment;
 import in.connectitude.newsx.ui.NewsFavouritesFragment;
 import in.connectitude.newsx.ui.NewsHighlightsFragment;
@@ -46,11 +47,11 @@ public class MainTabPageAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "HeadLines";
+                return context.getString(R.string.HeadLines);
             case 1:
-                return "Categories";
+                return context.getString(R.string.Categories);
             case 2:
-                return "Favourites";
+                return context.getString(R.string.favourites);
             default:
                 return null;
         }

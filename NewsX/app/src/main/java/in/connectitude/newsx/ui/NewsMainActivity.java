@@ -110,33 +110,6 @@ public class NewsMainActivity extends AppCompatActivity
 
 
 
-       /* bottomNavigationMovieMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation_news_menu);
-
-        bottomNavigationMovieMenu.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_highlights:
-                                mFragment = new NewsHighlightsFragment();
-
-                                break;
-                            case R.id.action_favourites:
-                                mFragment = new NewsFavouritesFragment();
-                                break;
-                            case R.id.action_categories:
-                                mFragment = new NewsCategoryFragment();
-                                break;
-
-
-                        }
-                        return loadFragment(mFragment);
-                    }
-                });*/
-
-
-
-        /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
 
         emailTextView = (TextView)header.findViewById(R.id.email_textViewHeader);
         emailTextView.setText(email);

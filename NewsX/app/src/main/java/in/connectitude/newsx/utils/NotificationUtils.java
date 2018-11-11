@@ -83,7 +83,7 @@ public class NotificationUtils {
                 ignoreReminderIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Action ignoreReminderAction = new NotificationCompat.Action(R.drawable.ic_cancel_black_24px,
-                "No, thanks.",
+                context.getString(R.string.No_Thanks),
                 ignoreReminderPendingIntent);
         return ignoreReminderAction;
     }

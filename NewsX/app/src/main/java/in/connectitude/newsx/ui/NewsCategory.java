@@ -59,7 +59,7 @@ public class NewsCategory extends AppCompatActivity  {
 
 
 
-        String category = getIntent().getStringExtra("category_name");
+        String category = getIntent().getStringExtra(getString(R.string.category_name));
         if(category.equals(getString(R.string.business))){
             setTitle(R.string.BusinessTitle);
 
@@ -93,7 +93,7 @@ public class NewsCategory extends AppCompatActivity  {
         if(null == savedInstanceState){
             IndividualCategoryFragment individualCategoryFragment = new  IndividualCategoryFragment();
             Bundle fragmentBundle1 = new Bundle();
-            fragmentBundle1.putString("category", category);
+            fragmentBundle1.putString(getString(R.string.category), category);
             individualCategoryFragment.setArguments(fragmentBundle1);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.newsCategoryContainer, individualCategoryFragment)

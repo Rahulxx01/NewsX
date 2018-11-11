@@ -74,7 +74,7 @@ public class NewsCategoryAdapter extends RecyclerView.Adapter<NewsCategoryAdapte
                     Context context = view.getContext();
                     int position = getAdapterPosition();
                     Intent intent = new Intent(view.getContext(), NewsCategory.class);
-                    intent.putExtra("category_name",mListItems.get(position).getNewsCategoryName());
+                    intent.putExtra(context.getString(R.string.category_name),mListItems.get(position).getNewsCategoryName());
                     context.startActivity(intent);
 
                 }
